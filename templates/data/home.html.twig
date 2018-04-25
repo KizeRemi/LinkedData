@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+            <div class="form_content input_align">
+                {{ form_label(form.doi) }}
+                <div class="form_input">{{ form_widget(form.doi) }}</div>
+                <div class="form_error">{{ form_errors(form.doi)}}</div>
+            </div>
+        {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    {{ doi }}
+{% endblock %}
