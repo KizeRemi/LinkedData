@@ -6,21 +6,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\DataType;
+use App\RdfHandler\Graph;
 
 class DataController extends Controller
 {
-    public function data(Request $request)
+    public function data(Request $request, Graph $graph)
     {
         $form = $this->createForm(DataType::class);
         $form->handleRequest($request);
-        $doi = null;
+        $data = null;
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $doi = $form->getData()['doi'];
+            $data = $graph->getObject($form->getData()['doi']);
         }
 
         return $this->render('data/home.html.twig', [
             'form' => $form->createView(),
-            'doi' => $doi,
+            'data' => $data,
         ]);
     }
 }

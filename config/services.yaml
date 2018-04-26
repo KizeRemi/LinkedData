@@ -25,3 +25,15 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    app.easy_rdf.graph:
+        class: \EasyRdf_Graph
+        autowire: true
+        public: true
+    app.guzzle:
+        class: \GuzzleHttp\Client
+        autowire: true        
+        public: true
+
+    EasyRdf_Graph: '@app.easy_rdf.graph'
+    GuzzleHttp\Client: '@app.guzzle'

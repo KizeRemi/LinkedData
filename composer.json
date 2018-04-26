@@ -5,6 +5,7 @@
         "php": "^7.1.3",
         "ext-iconv": "*",
         "easyrdf/easyrdf": "^0.9.1",
+        "guzzlehttp/guzzle": "^6.3",
         "symfony/console": "^4.0",
         "symfony/flex": "^1.0",
         "symfony/form": "^4.0",

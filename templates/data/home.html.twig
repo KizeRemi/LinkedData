@@ -9,6 +9,8 @@
             </div>
         {{ form_widget(form) }}
     {{ form_end(form) }}
-
-    {{ doi }}
+    {% if data %}
+        <a href={{ data.url }}>{{ data.title }}</a> {{ data.date|date("m/d/Y") }}
+    {% endif %}
+    
 {% endblock %}
