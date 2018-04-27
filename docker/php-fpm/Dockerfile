@@ -1,9 +1,12 @@
-FROM phpdockerio/php72-fpm:latest
+FROM php:7.2-fpm
+
 WORKDIR "/application"
 
-# Install selected extensions and other stuff
-RUN apt-get update \
-    && apt-get -y --no-install-recommends install  php7.2 \
-    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+COPY . /application
 
-RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
+RUN apt-get update \
+    && apt-get install -y zip
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN composer install --prefer-dist
