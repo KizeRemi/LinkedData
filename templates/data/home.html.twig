@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h1>Données liées</h1>
     {{ form_start(form) }}
             <div class="form_content input_align">
                 {{ form_label(form.doi) }}
@@ -10,7 +11,14 @@
         {{ form_widget(form) }}
     {{ form_end(form) }}
     {% if data %}
-        <a href={{ data.url }}>{{ data.title }}</a> {{ data.date|date("m/d/Y") }}
+        <h2>Résultats</h2>
+        <a href={{ data.url }}>{{ data.title }}</a> Publié le {{ data.date|date("m/d/Y") }} <br><br>
+        Authors:
+        <ul>
+        {% for author in data.authors %}
+            <li>{{ author }}</li>
+        {% endfor %}
+        </ul>
     {% endif %}
     
 {% endblock %}

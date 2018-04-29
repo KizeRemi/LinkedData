@@ -12,17 +12,21 @@ class Data
     /** @var string */
     private $url;
 
+    /** @var array */
+    private $authors;
+
     /**
      * @param string $title
      * @param \DateTime $date
      * 
      * @return Data
      */
-    public static function create(string $title, \DateTime $date, string $url): Data
+    public static function create(string $title, \DateTime $date, array $authors, string $url): Data
     {
         $object = new self();
         $object->setTitle($title);
         $object->setDate($date);
+        $object->setAuthors($authors);
         $object->setUrl($url);
 
         return $object;
@@ -66,6 +70,26 @@ class Data
     public function getDate(): \DateTime
     {
         return $this->date;
+    }
+
+    /**
+     * @param array $authors
+     * 
+     * @return Data
+     */
+    public function setAuthors(array $authors): Data
+    {
+        $this->authors = $authors;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAuthors(): array
+    {
+        return $this->authors;
     }
 
     /**

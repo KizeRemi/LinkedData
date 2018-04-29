@@ -12,7 +12,10 @@ class DataType extends AbstractType
     {
        
         $builder
-            ->add('doi', TextType::class, ['label' => 'Ajouter un DOI'])
+            ->add('doi', TextType::class, [
+                'label' => 'Ajouter un DOI',
+                'attr' => ['placeholder' => 'Ex: 10.1145/147126.147133'],
+            ])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer']);
     }
 }

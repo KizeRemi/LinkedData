@@ -33,6 +33,7 @@ class Graph
      */
     public function getObject(string $doi): ?Data
     {
+        $authors = [];
         $url = self::RDF_URL . $doi;
         $rdf = $this->dataProvider->getRdf($doi);
         if (!is_string($rdf)) {
@@ -41,9 +42,15 @@ class Graph
 
         $this->easyRdf->parse($rdf, 'turtle');
 
+        $authorsResources = $this->easyRdf->all($url, 'dcterms:creator');
+        foreach ($authorsResources as $author) {
+            $authors[] = $author->get('foaf:name');
+        }
+
         return Data::create(
             $this->easyRdf->get($url, 'dc:title')->getValue(),
             $this->easyRdf->get($url, 'dc:date')->getValue(),
+            $authors,
             $url
         );
     }
